@@ -37,7 +37,8 @@ function ReservoirData(props) {
 
     useEffect(() => {
         // const url = `/dynamicapp/req/JSONDataServlet?Stations=${props.id}&SensorNums=15&dur_code=${(chartRange === '6 months' ? 'D' : 'M')}&${getDateRange()}`;
-        const url = `http://localhost:3000/resdata?stationId=${props.id}&span=2`
+        const url = `http://ec2-52-25-236-61.us-west-2.compute.amazonaws.com:3000/resdata?stationid=${props.id}&span=2`
+        console.log(url)
         axios.get(url)
             .then(response => {
                 // setData(cleanData(response.data));
