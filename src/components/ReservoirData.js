@@ -11,7 +11,7 @@ function ReservoirData(props) {
     const [chartRange, setChartRange] = useState('1 year');
 
     const options = [
-        { value: '6 months', label: '6 months' },
+        // { value: '6 months', label: '6 months' },
         { value: '1 year', label: '1 year' },
         { value: '2 years', label: '2 years' }
     ]
@@ -56,12 +56,12 @@ function ReservoirData(props) {
     }, [])
 
     const renderLineChart = (
-        <LineChart width={650} height={400} data={data.slice(0, 10)} margin={{ top: 20, right: 20, left: 50, bottom: 30 }}>
+        <LineChart className="line-chart" width={900} height={450} data={(chartRange === '1 year' ? data.slice(12, 23) : data.slice(0, 23))} margin={{ top: 20, right: 20, left: 50, bottom: 30 }}>
             <Line type="monotone" dataKey="value" stroke="#8884d8" isAnimationActive={false} />
             <CartesianGrid stroke="#ccc" />
             <XAxis label={{ dy: 25, fontSize: 20 }} dataKey="date" interval={5} tick={{ fontSize: 12 }} />
             <YAxis label={{ value: "Current Storage (AF)", dx: -60, angle: -90, fontSize: 20 }} tick={{ fontSize: 12 }} />
-        </LineChart>
+        </LineChart >
     );
 
 
@@ -83,7 +83,7 @@ function ReservoirData(props) {
                 {props.name}
                 <div className="chart-container">
                     {renderLineChart}
-                    <Select className="right-justified-select" options={options} styles={customStyles} fontSize='12' defaultValue={options[1]} onChange={updateRange} />
+                    <Select className="right-justified-select" options={options} styles={customStyles} fontSize='12' defaultValue={options[0]} onChange={updateRange} />
 
                 </div>
             </h3>
