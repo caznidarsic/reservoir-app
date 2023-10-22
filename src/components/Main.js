@@ -7,6 +7,7 @@ import reservoirIDs from '../constants/reservoirIDs';
 function Main() {
 
     const resCards = reservoirIDs.map((res) => {
+        // console.log(res.id);
         return (
             <ReservoirData name={res.name} id={res.id} key={res.id} />
         )
@@ -18,12 +19,12 @@ function Main() {
     }
 
     return (
-        <div className="App">
-            <div className="App-background">
-                {/* <button onClick={clickHandler}>Click me!</button> */}
-                {resCards}
-            </div>
+
+
+        < div className="cards-flex-container" >
+            {resCards}
         </div >
+
     );
 }
 

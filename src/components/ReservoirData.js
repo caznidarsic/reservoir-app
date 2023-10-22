@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Select from 'react-select';
 
 function ReservoirData(props) {
@@ -38,7 +38,8 @@ function ReservoirData(props) {
     useEffect(() => {
         // const url = `/dynamicapp/req/JSONDataServlet?Stations=${props.id}&SensorNums=15&dur_code=${(chartRange === '6 months' ? 'D' : 'M')}&${getDateRange()}`;
         const url = `https://www.reservoirapi.christianznidarsic.com/resdata?stationid=${props.id}&span=2`
-        console.log(url)
+        // const url = `http://localhost:3000/resdata?stationid=${props.id}&span=2`
+
         axios.get(url)
             .then(response => {
                 // setData(cleanData(response.data));
@@ -48,20 +49,22 @@ function ReservoirData(props) {
                 setLoading(false);
             })
             .catch(error => {
-                console.log(error)
-                setError(error);
+                // console.log(error)
+                // setError(error);
                 setLoading(false);
             })
 
     }, [])
 
     const renderLineChart = (
-        <LineChart className="line-chart" width={900} height={450} data={(chartRange === '1 year' ? data.slice(12, 23) : data.slice(0, 23))} margin={{ top: 20, right: 20, left: 50, bottom: 30 }}>
-            <Line type="monotone" dataKey="value" stroke="#8884d8" isAnimationActive={false} />
-            <CartesianGrid stroke="#ccc" />
-            <XAxis label={{ dy: 25, fontSize: 20 }} dataKey="date" interval={5} tick={{ fontSize: 12 }} />
-            <YAxis label={{ value: "Current Storage (AF)", dx: -60, angle: -90, fontSize: 20 }} tick={{ fontSize: 12 }} />
-        </LineChart >
+        <ResponsiveContainer width="100%" height="100%">
+            <LineChart className="line-chart" data={(chartRange === '1 year' ? data.slice(12, 23) : data.slice(0, 23))} >
+                <Line type="monotone" dataKey="value" stroke="#8884d8" isAnimationActive={false} />
+                <CartesianGrid stroke="#ccc" />
+                <XAxis label={{ dy: 25, fontSize: 20 }} dataKey="date" interval={5} tick={{ fontSize: 12 }} />
+                <YAxis label={{ value: "Current Storage (AF)", dx: -60, angle: -90, fontSize: 20 }} tick={{ fontSize: 12 }} />
+            </LineChart >
+        </ResponsiveContainer>
     );
 
 
@@ -78,16 +81,16 @@ function ReservoirData(props) {
     }
 
     return (
-        <div className="ReservoirCard">
-            <h3>
-                {props.name}
-                <div className="chart-container">
-                    {renderLineChart}
-                    <Select className="right-justified-select" options={options} styles={customStyles} fontSize='12' defaultValue={options[0]} onChange={updateRange} />
-
-                </div>
-            </h3>
+        // <div className="ReservoirCard">
+        <div className="res-flex-container">
+            <h3>Storage History</h3>
+            {renderLineChart}
+            <div classname="res-flex-container-bottom">
+                <Select options={options} styles={customStyles} fontSize='12' defaultValue={options[0]} onChange={updateRange} />
+            </div>
         </div>
+        // </div>
+
     )
 }
 
