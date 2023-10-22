@@ -85,7 +85,7 @@ function ReservoirData(props) {
         <div className="res-flex-container">
             <h3>Storage History</h3>
             {renderLineChart}
-            <div classname="res-flex-container-bottom">
+            <div className="res-flex-container-bottom">
                 <Select options={options} styles={customStyles} fontSize='12' defaultValue={options[0]} onChange={updateRange} />
             </div>
         </div>
