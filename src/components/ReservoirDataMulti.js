@@ -1,14 +1,20 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { ComposedChart, LineChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { ComposedChart, LineChart, AreaChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import Select from 'react-select';
+import reservoirIDs from '../constants/reservoirIDs';
 
-function ReservoirData(props) {
+function ReservoirDataMulti() {
 
     const [data, setData] = useState([]);
+    const [areas, setAreas] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [chartRange, setChartRange] = useState('1 year');
+
+    const totalCapacity = reservoirIDs.reduce((total, reservoir) => {
+        return total + reservoir.capacity;
+    }, 0);
 
     const options = [
         // { value: '6 months', label: '6 months' },
@@ -30,26 +36,35 @@ function ReservoirData(props) {
         })
     };
 
+
     function updateRange(newRange) {
         setChartRange(newRange.value);
     }
 
     useEffect(() => {
-        // const url = `/dynamicapp/req/JSONDataServlet?Stations=${props.id}&SensorNums=15&dur_code=${(chartRange === '6 months' ? 'D' : 'M')}&${getDateRange()}`;
-        // const url = `https://www.reservoirapi.christianznidarsic.com/resdata?stationid=${props.id}&span=2`
-        const url = `http://localhost:3000/resdata?stationid=${props.id}&span=2`
+        // Sort the reservoirs by capacity in ascending order and create a string of comma separated IDs
+        const sortedReservoirs = reservoirIDs.sort((a, b) => a.capacity - b.capacity);
+        const idArray = sortedReservoirs.map(reservoir => reservoir.id);
+        const idString = idArray.join(',');
+
+        const url = `https://www.reservoirapi.christianznidarsic.com/resdata?stationid=${idString}&span=2`
+        // const url = `http://localhost:3000/resdata?stationid=${idString}&span=2`
 
         axios.get(url)
             .then(response => {
-                // setData(cleanData(response.data));
                 setData(response.data);
+                setAreas(sortedReservoirs.map((res) => {
+                    return (
+                        <Area key={res.id} type="linear" dot={false} dataKey={res.id} stackId={1} stroke="#00008b" isAnimationActive={true} legendType="none" />
+                    )
+                }
+                ));
 
-                // console.log(data);
                 setLoading(false);
             })
             .catch(error => {
-                // console.log(error)
-                // setError(error);
+                console.log(error)
+                setError(error);
                 setLoading(false);
             })
 
@@ -60,11 +75,13 @@ function ReservoirData(props) {
             <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(12, 24) : data.slice(0, 24))} margin={{ top: 0, right: 40, left: 50, bottom: 20 }}>
                 <CartesianGrid stroke="#ccc" />
                 <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" />
-                <Area type="linear" dot={false} dataKey="average" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="historical*" />
-                <Area type="linear" dot={false} dataKey="value" stroke="#00008b" isAnimationActive={true} name="current" />
+                <Tooltip />
+                <Area type="linear" dot={false} dataKey="totalAverage" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="historical" />
+
+                {areas}
                 <XAxis label={{ position: "insideBottom", offset: -25, fontSize: 20 }} dataKey="date" interval={0} tick={{ fontSize: 12, angle: -20, dy: 8 }} />
-                <YAxis label={{ value: "Current Storage (AF)", angle: -90, dx: -45, fontSize: 20 }} tickCount={10} tick={{ fontSize: 12 }} domain={[0, Math.floor(1.1 * props.capacity)]} />
-                <ReferenceLine y={props.capacity} stroke="red" label={{ value: `Capacity: ${props.capacity} AF`, position: "insideLeft", dy: 10, fontSize: 16 }} />
+                <YAxis label={{ value: "Current Storage (AF)", angle: -90, dx: -50, fontSize: 20 }} tickCount={10} tick={{ fontSize: 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
+                <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity} AF`, position: "insideLeft", dy: 10, fontSize: 16 }} />
             </ComposedChart >
         </ResponsiveContainer>
     );
@@ -97,4 +114,4 @@ function ReservoirData(props) {
     )
 }
 
-export default ReservoirData;
+export default ReservoirDataMulti;
