@@ -7,7 +7,7 @@ import reservoirIDs from '../constants/reservoirIDs';
 
 
 function ReservoirPage() {
-    console.log("RENDER AGAIN")
+    // console.log("RENDER AGAIN")
     const { reservoirId } = useParams();
     const res = reservoirIDs.find(reservoir => reservoir.id === reservoirId);
 
@@ -19,14 +19,13 @@ function ReservoirPage() {
 
 
     useEffect(() => {
-        console.log('USE EFFECT')
+        // console.log('USE EFFECT')
         async function getData() {
             let url = `https://www.reservoirapi.christianznidarsic.com/resdata/daily?stationid=${res.id}`
             // let url = `http://localhost:3000/resdata/daily?stationid=${res.id}`
             await axios.get(url)
                 .then(response => {
                     setData_yesterday(response.data);
-                    console.log("fetching data (yesterday)");
                     setLoading(false);
                 })
                 .catch(error => {
@@ -41,7 +40,6 @@ function ReservoirPage() {
             await axios.get(url)
                 .then(response => {
                     setData_current(response.data);
-                    console.log("fetching data (current)");
                     setLoading(false);
                 })
                 .catch(error => {

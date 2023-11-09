@@ -1,7 +1,4 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { ComposedChart, BarChart, Bar, LineChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-import Select from 'react-select';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
 function ReservoirDataToday(props) {
     const storagePercentage = props.data[0].value / props.capacity;
@@ -45,26 +42,6 @@ function ReservoirDataToday(props) {
 
         return monthName;
     }
-
-    const options = [
-        // { value: '6 months', label: '6 months' },
-        { value: '1 year', label: '1 year' },
-        { value: '2 years', label: '2 years' }
-    ]
-
-    const customStyles = {
-        control: (provided) => ({
-            ...provided,
-            fontSize: '16px',
-            height: '20px',
-            width: '150px'
-        }),
-        menu: (provided) => ({
-            ...provided,
-            fontSize: '16px',
-            width: '150px',
-        })
-    };
 
     const renderLineChart = (
         < ResponsiveContainer width="100%" height="100%" >

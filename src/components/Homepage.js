@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom'
 import ReservoirDataMulti from './ReservoirDataMulti'
 import reservoirIDs from '../constants/reservoirIDs';
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { ComposedChart, LineChart, AreaChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { ComposedChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import Select from 'react-select';
 import reservoirIDs from '../constants/reservoirIDs';
 
@@ -63,7 +63,7 @@ function ReservoirDataMulti() {
                 setLoading(false);
             })
             .catch(error => {
-                console.log(error)
+                // console.log(error)
                 setError(error);
                 setLoading(false);
             })

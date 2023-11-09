@@ -1,13 +1,11 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { ComposedChart, LineChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import React, { useState } from 'react';
+import { ComposedChart, Area, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import Select from 'react-select';
 
 function ReservoirData(props) {
-
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [data, setData] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
     const [chartRange, setChartRange] = useState('1 year');
 
     const options = [
