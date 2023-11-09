@@ -1,15 +1,15 @@
 import './App.css';
-import ReservoirData from './components/ReservoirData';
-import reservoirIDs from './constants/reservoirIDs';
-import Main from './components/Main';
-import ReservoirDropdown from './components/ReservoirDropdown';
-import Header from './components/Header';
+// import ReservoirData from './components/ReservoirData';
+// import reservoirIDs from './constants/reservoirIDs';
+// import Main from './components/Main';
+// import ReservoirDropdown from './components/ReservoirDropdown';
+// import Header from './components/Header';
 import ReservoirPage from './components/ReservoirPage';
 import Homepage from './components/Homepage';
 import Sidebar from './components/_Sidebar'
 
 
-import { BrowserRouter as Router, Route, Routes, Switch, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 // import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
 
@@ -32,7 +32,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Homepage />} />
             {/* <Route path="/Main" element={<Main />} /> */}
-            <Route path="/ReservoirPage" element={<ReservoirPage />} />
+            {/* <Route path="/ReservoirPage" element={<ReservoirPage />} /> */}
+            <Route path="/:reservoirId" element={<ReservoirPage />} />
           </Routes>
         </div>
 

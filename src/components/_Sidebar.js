@@ -6,15 +6,16 @@ import reservoirIDs from '../constants/reservoirIDs';
 function _Sidebar() {
 
     const resLinks = reservoirIDs.map((res) => {
+        const to = `/${res.id}`;
         return (
-            <MenuItem key={res.id} component={<Link to="/ReservoirPage" state={{ reservoir: res }} />}>{res.name}</MenuItem>
+            <MenuItem key={res.id} component={<Link to={to} />}>{res.name}</MenuItem>
         )
     }
     )
 
     return (
         <nav>
-            <Sidebar width="100%" backgroundColor='white'>
+            <Sidebar width="100%" height="50%">
                 <Menu>
                     <MenuItem component={<Link to="/" />}>Home</MenuItem>
                     <SubMenu label="Reservoirs">

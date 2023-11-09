@@ -47,15 +47,15 @@ function ReservoirDataMulti() {
         const idArray = sortedReservoirs.map(reservoir => reservoir.id);
         const idString = idArray.join(',');
 
-        const url = `https://www.reservoirapi.christianznidarsic.com/resdata?stationid=${idString}&span=2`
-        // const url = `http://localhost:3000/resdata?stationid=${idString}&span=2`
+        // const url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${idString}&span=2`
+        const url = `http://localhost:3000/resdata/monthly?stationid=${idString}&span=2`
 
         axios.get(url)
             .then(response => {
                 setData(response.data);
                 setAreas(sortedReservoirs.map((res) => {
                     return (
-                        <Area key={res.id} type="linear" dot={false} dataKey={res.id} stackId={1} stroke="#00008b" isAnimationActive={true} legendType="none" />
+                        <Area key={res.id} name={res.name} type="linear" dot={false} dataKey={res.id} stackId={1} stroke="#00008b" isAnimationActive={true} legendType="none" />
                     )
                 }
                 ));
@@ -72,16 +72,15 @@ function ReservoirDataMulti() {
 
     const renderLineChart = (
         <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(12, 24) : data.slice(0, 24))} margin={{ top: 0, right: 40, left: 50, bottom: 20 }}>
+            <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(12, 24) : data.slice(0, 24))} margin={{ top: 0, right: window.innerWidth < 868 ? 20 : 40, left: window.innerWidth < 868 ? 10 : 50, bottom: 20 }}>
                 <CartesianGrid stroke="#ccc" />
-                <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" />
-                <Tooltip />
+                <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" wrapperStyle={{ fontSize: window.innerWidth < 868 ? "8px" : "16px" }} iconSize={window.innerWidth < 868 ? 8 : 16} />
+                <Tooltip wrapperStyle={{ fontSize: window.innerWidth < 868 ? "10px" : "16px" }} />
                 <Area type="linear" dot={false} dataKey="totalAverage" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="historical" />
-
                 {areas}
-                <XAxis label={{ position: "insideBottom", offset: -25, fontSize: 20 }} dataKey="date" interval={0} tick={{ fontSize: 12, angle: -20, dy: 8 }} />
-                <YAxis label={{ value: "Current Storage (AF)", angle: -90, dx: -50, fontSize: 20 }} tickCount={10} tick={{ fontSize: 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
-                <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity} AF`, position: "insideLeft", dy: 10, fontSize: 16 }} />
+                <XAxis dataKey="date" interval={0} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12, angle: window.innerWidth < 868 ? -90 : -20, dy: window.innerWidth < 868 ? 16 : 8 }} />
+                <YAxis label={{ value: "Storage (Acre Feet)", angle: -90, dx: window.innerWidth < 868 ? -28 : -50, fontSize: window.innerWidth < 868 ? 12 : 20 }} tickCount={10} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
+                <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity.toLocaleString()} AF`, position: "insideLeft", dy: 10, fontSize: window.innerWidth < 868 ? 8 : 16 }} />
             </ComposedChart >
         </ResponsiveContainer>
     );
@@ -100,14 +99,12 @@ function ReservoirDataMulti() {
     }
 
     return (
-        <div className="res-flex-container">
-            <h3>Storage History</h3>
+        <div className="ReservoirChartMulti">
+            <h3 className="TitleOfChart">
+                Storage History
+            </h3>
             {renderLineChart}
-            <p style={{ fontSize: '10px' }}>
-                *Historical data is averaged from 1988 to present <br></br>
-                Data courtesy of cdec.water.ca.gov
-            </p>
-            <div className="res-flex-container-bottom">
+            <div className="ReservoirChartBottom">
                 <Select options={options} styles={customStyles} fontSize='12' isSearchable={false} defaultValue={options[0]} onChange={updateRange} />
             </div>
         </div>
