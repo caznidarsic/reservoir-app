@@ -17,6 +17,12 @@ function ReservoirPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // function to get the number of the month from a string in the format "MM/DD/YYYY"
+    function getMonthNumber(dateString) {
+        const dateParts = dateString.split("/");
+        const month = parseInt(dateParts[0]);
+        return month
+    }
 
     useEffect(() => {
         // console.log('USE EFFECT')
@@ -70,12 +76,14 @@ function ReservoirPage() {
         Else, the children (charts) will be rendered multiple times which will cut the chart animation short.*/
         if (data_yesterday[0].stationId === res.id && data_current[0].stationId === res.id) {
             // console.log("RENDERING CHARTS WITH resid: ", data_yesterday[0])
+            // need to get the average storage for the current month to be used in the current
+            const monthAverage = data_current.filter((element) => { return getMonthNumber(element.date) === getMonthNumber(data_yesterday[0].date) })[0];
             return (
                 <div className="ReservoirPage">
                     <h1 className="TitleOfPage">
                         {res.name}
                     </h1>
-                    <ReservoirDataToday name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_today`} data={data_yesterday} monthAverage={data_current[data_current.length - 1]} />
+                    <ReservoirDataToday name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_today`} data={data_yesterday} monthAverage={monthAverage} />
                     <ReservoirData name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_monthly`} data={data_current} />
                     <p className="DataFootnote">
                         *Historical data is averaged from 1988 to present <br></br>
