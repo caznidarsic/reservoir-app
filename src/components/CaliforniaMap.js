@@ -1,5 +1,4 @@
 import React from 'react';
-import ImageMapper from 'react-image-mapper';
 
 const CaliforniaMap = (props) => {
 
