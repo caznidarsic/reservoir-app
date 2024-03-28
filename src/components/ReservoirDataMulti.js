@@ -10,7 +10,7 @@ function ReservoirDataMulti() {
     const [areas, setAreas] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [chartRange, setChartRange] = useState('1 year');
+    const [chartRange, setChartRange] = useState('5 years');
 
     const totalCapacity = reservoirIDs.reduce((total, reservoir) => {
         return total + reservoir.capacity;
@@ -19,7 +19,8 @@ function ReservoirDataMulti() {
     const options = [
         // { value: '6 months', label: '6 months' },
         { value: '1 year', label: '1 year' },
-        { value: '2 years', label: '2 years' }
+        { value: '5 years', label: '5 years' },
+        { value: 'Max', label: 'Max' },
     ]
 
     const customStyles = {
@@ -47,7 +48,7 @@ function ReservoirDataMulti() {
         const idArray = sortedReservoirs.map(reservoir => reservoir.id);
         const idString = idArray.join(',');
 
-        const url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${idString}&span=2`
+        const url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${idString}&span=34`
         // const url = `http://localhost:3000/resdata/monthly?stationid=${idString}&span=2`
 
         axios.get(url)
@@ -70,19 +71,34 @@ function ReservoirDataMulti() {
 
     }, [])
 
+    // const renderLineChart = (
+    //     <ResponsiveContainer width="100%" height="100%" >
+    //         <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(data.length - 12, data.length) : chartRange === '5 years' ? data.slice(data.length - 60, data.length) : data.slice(0, data.length))} margin={{ top: 0, right: window.innerWidth < 868 ? 20 : 40, left: window.innerWidth < 868 ? 10 : 50, bottom: 20 }}>
+    //             <CartesianGrid stroke="#ccc" />
+    //             {/* <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" wrapperStyle={{ fontSize: window.innerWidth < 868 ? "8px" : "16px" }} iconSize={window.innerWidth < 868 ? 8 : 16} /> */}
+    //             <Tooltip wrapperStyle={{ fontSize: window.innerWidth < 868 ? "10px" : "16px" }} />
+    //             <Area type="linear" dot={false} dataKey="totalAverage" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="Historical Average" />
+    //             {areas}
+    //             <XAxis dataKey="date" interval={(chartRange === '1 year' ? 0 : chartRange === '5 years' ? 2 : 11)} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12, angle: window.innerWidth < 868 ? -90 : -20, dy: window.innerWidth < 868 ? 16 : 8 }} />
+    //             <YAxis label={{ value: "Storage (Acre Feet)", angle: -90, dx: window.innerWidth < 868 ? -28 : -50, fontSize: window.innerWidth < 868 ? 12 : 20 }} tickCount={10} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
+    //             <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity.toLocaleString()} AF`, position: "insideLeft", dy: 10, fontSize: window.innerWidth < 868 ? 8 : 16 }} />
+    //         </ComposedChart >
+    //     </ResponsiveContainer >
+    // );
+
     const renderLineChart = (
-        <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(12, 24) : data.slice(0, 24))} margin={{ top: 0, right: window.innerWidth < 868 ? 20 : 40, left: window.innerWidth < 868 ? 10 : 50, bottom: 20 }}>
+        <ResponsiveContainer width="100%" height="100%" >
+            <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(data.length - 12, data.length) : chartRange === '5 years' ? data.slice(data.length - 60, data.length) : data.slice(0, data.length))} margin={{ top: 0, right: 40, left: 50, bottom: 32 }}>
                 <CartesianGrid stroke="#ccc" />
-                <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" wrapperStyle={{ fontSize: window.innerWidth < 868 ? "8px" : "16px" }} iconSize={window.innerWidth < 868 ? 8 : 16} />
-                <Tooltip wrapperStyle={{ fontSize: window.innerWidth < 868 ? "10px" : "16px" }} />
-                <Area type="linear" dot={false} dataKey="totalAverage" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="historical" />
+                {/* <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" wrapperStyle={{ fontSize: window.innerWidth < 868 ? "8px" : "16px" }} iconSize={window.innerWidth < 868 ? 8 : 16} /> */}
+                <Tooltip wrapperStyle={{ fontSize: "16px" }} />
+                <Area type="linear" dot={false} dataKey="totalAverage" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="Historical Average" />
                 {areas}
-                <XAxis dataKey="date" interval={0} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12, angle: window.innerWidth < 868 ? -90 : -20, dy: window.innerWidth < 868 ? 16 : 8 }} />
-                <YAxis label={{ value: "Storage (Acre Feet)", angle: -90, dx: window.innerWidth < 868 ? -28 : -50, fontSize: window.innerWidth < 868 ? 12 : 20 }} tickCount={10} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
-                <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity.toLocaleString()} AF`, position: "insideLeft", dy: 10, fontSize: window.innerWidth < 868 ? 8 : 16 }} />
+                <XAxis dataKey="date" interval={(chartRange === '1 year' ? 0 : chartRange === '5 years' ? 2 : 11)} tick={{ fontSize: 12, angle: -90, dy: 28 }} />
+                <YAxis label={{ value: "Storage (Acre Feet)", angle: -90, dx: -50, fontSize: 20 }} tickCount={10} tick={{ fontSize: 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
+                <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity.toLocaleString()} AF`, position: "insideLeft", dy: 10, fontSize: 16 }} />
             </ComposedChart >
-        </ResponsiveContainer>
+        </ResponsiveContainer >
     );
 
 
@@ -104,8 +120,8 @@ function ReservoirDataMulti() {
                 Storage History
             </h3>
             {renderLineChart}
-            <div className="ReservoirChartBottom">
-                <Select options={options} styles={customStyles} fontSize='12' isSearchable={false} defaultValue={options[0]} onChange={updateRange} />
+            <div className="ReservoirChartBottom" >
+                <Select options={options} styles={customStyles} fontSize='12' isSearchable={false} defaultValue={options[1]} onChange={updateRange} />
             </div>
         </div>
     )

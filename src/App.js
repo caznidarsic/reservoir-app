@@ -35,10 +35,12 @@ function App() {
             {/* <Route path="/ReservoirPage" element={<ReservoirPage />} /> */}
             <Route path="/:reservoirId" element={<ReservoirPage />} />
           </Routes>
+          <div className="NameTag">
+            Created by <a href="https://www.linkedin.com/in/christian-znidarsic/" className='NameTagName'>Christian Znidarsic </a>
+            (<a href="https://github.com/caznidarsic" className='NameTagName'>GitHub</a>)
+          </div>
         </div>
-
       </div >
-
     </div>
   );
 }

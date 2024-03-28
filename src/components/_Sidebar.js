@@ -18,7 +18,7 @@ function _Sidebar() {
             <Sidebar width="100%" height="50%">
                 <Menu>
                     <MenuItem component={<Link to="/" />}>Home</MenuItem>
-                    <SubMenu label="Reservoirs">
+                    <SubMenu label="Reservoirs" defaultOpen={true}>
                         {resLinks}
                     </SubMenu>
                 </Menu>

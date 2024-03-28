@@ -29,6 +29,7 @@ a {
 /* App-header #################################################################*/
 .App-header {
   background-color: #ffffff;
+
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -43,13 +44,13 @@ a {
   /* border: 1px solid rgb(0, 0, 0); */
 }
 
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .App-header {
     font-size: calc(5px + 2vmin);
   }
 }
 
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .App-header {
     font-size: calc(10px + 2vmin);
   }
@@ -59,27 +60,47 @@ a {
 /* Content  ###################################################################*/
 .Content {
   display: flex;
+  background-color: #f7f7f7;
   /* flex: 1; */
   flex-direction: column;
   overflow-y: auto;
   align-items: center;
   flex-grow: 1;
 
-  /* border: 1px solid rgb(16, 251, 78); */
+  border: 1px solid rgb(212, 212, 212);
 }
 
 /* DataFootnote  ######################################################################*/
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .DataFootnote {
     font-size: 8px;
   }
 }
 
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .DataFootnote {
     font-size: 10px;
   }
 }
+
+/* IconLink  ######################################################################*/
+.IconLink {
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.1s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: small;
+}
+
+.IconLink:hover {
+  transform: scale(1.2);
+  transform-origin: center;
+  z-index: 1;
+}
+
+
 
 
 /* Main  ######################################################################*/
@@ -89,20 +110,126 @@ a {
   overflow-y: hidden;
   overflow-x: hidden;
 
-  /* border: 1px solid rgb(255, 0, 0); */
+  /* border: 1px solid rgb(200, 0, 236); */
 }
 
-@media (max-height: 768px) {
+/* @media (max-height: 768px) {
   .Main {
     height: 72%;
   }
-}
+} */
 
 /* @media (min-width: 868px) {
   .Main {
     height: 100%;
   }
 } */
+
+
+/* MapContainer  ######################################################################*/
+.MapContainer {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid rgb(26, 255, 0); */
+  /* width: min-content; */
+  /* width: 100%; */
+  /* max-width: 100%; */
+  height: max-content;
+  height: 400px;
+  width: 350px;
+}
+
+@media (max-width: 968px) {
+  .MapContainer {
+    /* background-color: red; */
+    scale: 0.70;
+    width: 130%;
+    max-width: 500px;
+    height: min-content;
+    /* width: min-content; */
+    /* height: min-content; */
+  }
+}
+
+.MapContainerMulti {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid rgb(26, 255, 0); */
+  /* width: min-content; */
+  /* width: 100%; */
+  /* max-width: 100%; */
+  height: max-content;
+  height: 720px;
+  width: 650px;
+}
+
+@media (max-width: 968px) {
+  .MapContainerMulti {
+    /* background-color: red; */
+    scale: 0.70;
+    width: 130%;
+    max-width: 500px;
+    height: min-content;
+    /* width: min-content; */
+    /* height: min-content; */
+  }
+}
+
+.MapContainerOuter {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid rgb(0, 8, 255); */
+  /* width: min-content; */
+  /* width: 100%; */
+  /* max-height: 400px; */
+  height: min-content;
+}
+
+@media (max-width: 968px) {
+  .MapContainerOuter {
+    /* background-color: red; */
+    /* scale: 0.80; */
+    width: 100%;
+    /* width: min-content; */
+    /* height: min-content; */
+  }
+}
+
+.MapImage {
+  display: block;
+  /* border: 1px solid rgb(255, 0, 0); */
+  width: 100%;
+  height: 100%;
+}
+
+
+/* NameTag  ######################################################################*/
+.NameTag {
+  color: #9b9b9b;
+  padding: 2%;
+}
+
+@media (max-width: 968px) {
+  .NameTag {
+    scale: 0.7;
+  }
+}
+
+.NameTagName {
+  color: limegreen;
+}
 
 
 /* ReservoirChartBottom  ######################################################*/
@@ -112,6 +239,7 @@ a {
   justify-content: flex-end;
   flex-direction: row;
   padding: 1%;
+  /* z-index: -1; */
 
   /* border: 1px solid rgb(0, 0, 0); */
 }
@@ -122,29 +250,37 @@ a {
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #353535;
   /* min-height: 400px; */
-  border: 1px solid rgb(0, 0, 0);
+  /* border: 1px solid rgb(0, 149, 147); */
   border-radius: 15px;
+  /* min-width: min-content; */
+  width: min-content;
+  min-height: 400px;
+  max-height: 400px;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .ReservoirChartDaily {
-    width: 95%;
-    min-height: 200px;
-    max-height: 200px;
+    /* width: min-content; */
+    width: 140%;
+    /* min-height: 300px;
+    max-height: 300px; */
+    scale: .7;
   }
 }
 
 /* For some reason, Chrome was reducing the height of charts when only declaring "height: 600px".
 Changed to declaring both min-height and max-height and the issue was fixed. ¯\_(ツ)_/¯ */
-@media (min-width: 868px) {
+/* @media (min-width: 68px) {
   .ReservoirChartDaily {
-    width: 600px;
+    width: 100%;
     min-height: 400px;
     max-height: 400px;
   }
-}
+} */
 
 .ReservoirChartDailyHeader {
   display: flex;
@@ -161,11 +297,17 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   display: flex;
   /* flex: 1; */
   flex-direction: row;
-  /* justify-content: center; */
-  width: 100%;
+  /* justify-content: space-around; */
+  width: min-content;
   height: 90%;
 
   /* border: 1px solid rgb(0, 0, 0); */
+}
+
+@media (max-width: 968px) {
+  .ReservoirChartDailyContent {
+    width: 100%;
+  }
 }
 
 .ReservoirChartDailyContentChart {
@@ -173,43 +315,50 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   /* flex: 1; */
   flex-direction: row;
   /* justify-content: center; */
-  min-width: 140px;
+  /* min-width: 140px; */
   height: 100%;
-  width: 25%;
+  /* width: 70%; */
+  /* width: 250px; */
+  min-width: 275px;
+  max-width: 200px;
 
   /* border: 1px solid rgb(0, 0, 0); */
 }
 
-/* @media (max-width: 868px) {
+@media (max-width: 968px) {
   .ReservoirChartDailyContentChart {
-    width: 25%;
+    /* width: 50%; */
+    min-width: 50%;
+    /* scale: .5; */
   }
-} */
+}
 
-@media (min-width: 868px) {
+/* @media (min-width: 968px) {
   .ReservoirChartDailyContentChart {
     width: 70%;
   }
-}
+} */
 
 .ReservoirChartDailyContentInfo {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  width: 75%;
+  /* width: 75%; */
+  width: 275px;
   height: 100%;
 
   /* border: 1px solid rgb(0, 0, 0); */
 }
 
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .ReservoirChartDailyContentInfo {
-    font-size: xx-small;
+    font-size: small;
+    width: 50%;
   }
 }
 
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .ReservoirChartDailyContentInfo {
     font-size: medium;
   }
@@ -232,26 +381,30 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   align-items: stretch;
   flex-direction: column;
   color: #353535;
+  /* width: 50%; */
 
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 15px;
+  /* border: 1px solid rgb(0, 0, 0);
+  border-radius: 15px; */
 }
 
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .ReservoirChartMonthly {
-    width: 95%;
-    min-height: 300px;
-    max-height: 300px;
+    width: 125%;
+    height: 400px;
+    /* min-height: 400px;
+    max-height: 400px; */
+    scale: .8;
   }
 }
 
 /* For some reason, Chrome was reducing the height of charts when only declaring "height: 600px".
 Changed to declaring both min-height and max-height and the issue was fixed. ¯\_(ツ)_/¯ */
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .ReservoirChartMonthly {
-    width: 1200px;
-    min-height: 600px;
-    max-height: 600px;
+    width: 95%;
+    /* min-height: 600px;
+    max-height: 600px; */
+    height: 800px;
   }
 }
 
@@ -263,25 +416,28 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   flex-direction: column;
   color: #353535;
 
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 15px;
+  /* border: 1px solid rgb(0, 17, 255); */
+  /* border-radius: 15px; */
 }
 
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .ReservoirChartMulti {
-    width: 95%;
-    min-height: 300px;
-    max-height: 300px;
+    width: 125%;
+    /* min-height: 350px;
+    max-height: 350px; */
+    height: 400px;
+    scale: .8;
   }
 }
 
 /* For some reason, Chrome was reducing the height of charts when only declaring "height: 600px".
 Changed to declaring both min-height and max-height and the issue was fixed. ¯\_(ツ)_/¯ */
-@media (min-width: 869px) {
+@media (min-width: 969px) {
   .ReservoirChartMulti {
-    width: 1200px;
-    min-height: 600px;
-    max-height: 600px;
+    width: 95%;
+    /* min-height: 600px;
+    max-height: 600px; */
+    height: 800px;
   }
 }
 
@@ -298,18 +454,18 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   overflow-y: auto;
   overflow-x: hidden;
   min-width: 100px;
-  max-width: 200px;
+  max-width: 180px;
 
   /* border: 1px solid rgb(0, 0, 0); */
 }
 
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .Sidebar {
-    font-size: x-small;
+    font-size: small;
   }
 }
 
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .Sidebar {
     font-size: medium;
   }
@@ -338,18 +494,38 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   row-gap: 3%;
   width: 100%;
 
+  /* border: 1px solid rgb(30, 181, 85); */
+}
+
+/* ReservoirPage ################################################################*/
+.ReservoirPageTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* padding-bottom: 250px; */
+  /* align-items: center; */
+  /* row-gap: 3%; */
+  width: 100%;
+
   /* border: 1px solid rgb(213, 12, 12); */
+}
+
+@media (max-width: 968px) {
+  .ReservoirPageTop {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 
 /* TitleOfPage ################################################################*/
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .TitleOfPage {
     font-size: 20px;
   }
 }
 
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .TitleOfPage {
     font-size: 32px;
   }
@@ -357,13 +533,13 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
 
 
 /* TitleOfChart ################################################################*/
-@media (max-width: 868px) {
+@media (max-width: 968px) {
   .TitleOfChart {
     font-size: 14px;
   }
 }
 
-@media (min-width: 868px) {
+@media (min-width: 968px) {
   .TitleOfChart {
     font-size: 20px;
   }

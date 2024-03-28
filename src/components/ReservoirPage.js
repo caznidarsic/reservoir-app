@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom'
 import ReservoirData from './ReservoirData'
 import ReservoirDataToday from './ReservoirDataToday'
 import reservoirIDs from '../constants/reservoirIDs';
+import CaliforniaMap from './CaliforniaMap';
 
 
 function ReservoirPage() {
+    let mapWidth = 300;
+
     // console.log("RENDER AGAIN")
     const { reservoirId } = useParams();
     const res = reservoirIDs.find(reservoir => reservoir.id === reservoirId);
@@ -40,8 +43,8 @@ function ReservoirPage() {
                     setLoading(false);
                 })
 
-            url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${res.id}&span=2`
-            // url = `http://localhost:3000/resdata/monthly?stationid=${res.id}&span=2`
+            url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${res.id}&span=34`
+            // url = `http://localhost:3000/resdata/monthly?stationid=${res.id}&span=34`
 
             await axios.get(url)
                 .then(response => {
@@ -83,10 +86,14 @@ function ReservoirPage() {
                     <h1 className="TitleOfPage">
                         {res.name}
                     </h1>
-                    <ReservoirDataToday name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_today`} data={data_yesterday} monthAverage={monthAverage} />
+                    <div className="ReservoirPageTop">
+                        <ReservoirDataToday res={res} name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_today`} data={data_yesterday} monthAverage={monthAverage} />
+                        <CaliforniaMap resIds={[res]} width={mapWidth} height={mapWidth * (2299 / 2000)} mapContainerClass={`MapContainer`} />
+                    </div>
+                    {/* <ReservoirDataToday name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_today`} data={data_yesterday} monthAverage={monthAverage} /> */}
                     <ReservoirData name={res.name} id={res.id} capacity={res.capacity} key={`${res.id}_monthly`} data={data_current} />
                     <p className="DataFootnote">
-                        *Historical data is averaged from 1988 to present <br></br>
+                        {/* *Historical data is averaged from 1988 to present <br></br> */}
                         Data courtesy of cdec.water.ca.gov
                     </p>
                 </div>
