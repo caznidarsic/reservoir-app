@@ -5,6 +5,7 @@ import ReservoirData from './ReservoirData'
 import ReservoirDataToday from './ReservoirDataToday'
 import reservoirIDs from '../constants/reservoirIDs';
 import CaliforniaMap from './CaliforniaMap';
+import ReservoirSummaryText from './ReservoirSummaryText';
 
 
 function ReservoirPage() {
@@ -96,6 +97,7 @@ function ReservoirPage() {
                         {/* *Historical data is averaged from 1988 to present <br></br> */}
                         Data courtesy of cdec.water.ca.gov
                     </p>
+                    <ReservoirSummaryText summary={res.summary} />
                 </div>
             );
         }

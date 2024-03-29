@@ -19,7 +19,7 @@ function Homepage() {
             <h3 className="TitleOfChart">
                 Reservoir Map
             </h3>
-            <CaliforniaMap resIds={reservoirIDs} width={mapWidth} height={mapWidth * (2299 / 2000)} mapContainerClass={`MapContainerMulti`} />
+            <CaliforniaMap resIds={reservoirIDs} mapContainerClass={`MapContainerMulti`} />
         </div>
     );
 }

@@ -113,11 +113,14 @@ a {
   /* border: 1px solid rgb(200, 0, 236); */
 }
 
-/* @media (max-height: 768px) {
+/* For some reason, mobile browsers cut off the bottom of the site. ¯\_(ツ)_/¯
+To fix this, we set the height of the Main window to less than 100% 
+so that the whole page stays in view on smaller devices.*/
+@media (max-width: 968px) {
   .Main {
-    height: 72%;
+    height: 79%;
   }
-} */
+}
 
 /* @media (min-width: 868px) {
   .Main {
@@ -219,11 +222,14 @@ a {
 .NameTag {
   color: #9b9b9b;
   padding: 2%;
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid rgb(255, 0, 0); */
 }
 
 @media (max-width: 968px) {
   .NameTag {
-    scale: 0.7;
+    /* scale: 0.7; */
   }
 }
 
@@ -391,8 +397,8 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   .ReservoirChartMonthly {
     width: 125%;
     height: 400px;
-    /* min-height: 400px;
-    max-height: 400px; */
+    min-height: 400px;
+    /* max-height: 400px; */
     scale: .8;
   }
 }
@@ -402,8 +408,8 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
 @media (min-width: 968px) {
   .ReservoirChartMonthly {
     width: 95%;
-    /* min-height: 600px;
-    max-height: 600px; */
+    min-height: 600px;
+    max-height: 600px;
     height: 800px;
   }
 }
@@ -439,6 +445,22 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
     max-height: 600px; */
     height: 800px;
   }
+}
+
+
+/* ReservoirSummaryText ######################################################*/
+.ReservoirSummaryText {
+  width: 90%;
+  height: 100%;
+  text-align: left;
+  white-space: pre-wrap;
+  /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.ReservoirSummaryTextHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 
@@ -478,10 +500,12 @@ Changed to declaring both min-height and max-height and the issue was fixed. ¯\
   flex-direction: column;
   padding-bottom: 250px;
   align-items: center;
-  row-gap: 3%;
+  justify-content: baseline;
+  row-gap: 1%;
   width: 100%;
+  height: min-content;
 
-  /* border: 1px solid rgb(213, 12, 12); */
+  /* border: 1px solid rgb(98, 255, 0); */
 }
 
 
