@@ -19,7 +19,8 @@ function App() {
     <div className="App">
 
       <div className="App-header">
-        <h1>Reservoirs.fyi</h1>
+        <div className="App-header-title"> Reservoirs.fyi</div>
+        <div className="App-header-description">California reservoir tracker</div>
       </div>
 
       <div className="Main">
