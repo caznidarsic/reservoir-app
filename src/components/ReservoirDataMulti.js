@@ -48,7 +48,7 @@ function ReservoirDataMulti() {
         const idArray = sortedReservoirs.map(reservoir => reservoir.id);
         const idString = idArray.join(',');
 
-        const url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${idString}&span=34`
+        const url = `https://api.reservoirs.fyi/resdata/monthly?stationid=${idString}&span=34`
         // const url = `http://localhost:3000/resdata/monthly?stationid=${idString}&span=2`
 
         axios.get(url)
