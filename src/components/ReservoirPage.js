@@ -31,7 +31,7 @@ function ReservoirPage() {
     useEffect(() => {
         // console.log('USE EFFECT')
         async function getData() {
-            let url = `https://api.reservoirs.fyi/resdata/daily?stationid=${res.id}`
+            let url = `https://www.reservoirapi.christianznidarsic.com/resdata/daily?stationid=${res.id}`
             // let url = `http://localhost:3000/resdata/daily?stationid=${res.id}`
             await axios.get(url)
                 .then(response => {
@@ -44,7 +44,7 @@ function ReservoirPage() {
                     setLoading(false);
                 })
 
-            url = `https://api.reservoirs.fyi/resdata/monthly?stationid=${res.id}&span=34`
+            url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${res.id}&span=34`
             // url = `http://localhost:3000/resdata/monthly?stationid=${res.id}&span=34`
 
             await axios.get(url)
