@@ -49,7 +49,7 @@ function ReservoirDataMulti() {
         const idString = idArray.join(',');
 
         const url = `https://www.reservoirapi.christianznidarsic.com/resdata/monthly?stationid=${idString}&span=34`
-        // const url = `http://localhost:3000/resdata/monthly?stationid=${idString}&span=2`
+        // const url = `http://localhost:3000/resdata/monthly?stationid=${idString}&span=34`
 
         axios.get(url)
             .then(response => {
@@ -71,20 +71,6 @@ function ReservoirDataMulti() {
 
     }, [])
 
-    // const renderLineChart = (
-    //     <ResponsiveContainer width="100%" height="100%" >
-    //         <ComposedChart className="line-chart" data={(chartRange === '1 year' ? data.slice(data.length - 12, data.length) : chartRange === '5 years' ? data.slice(data.length - 60, data.length) : data.slice(0, data.length))} margin={{ top: 0, right: window.innerWidth < 868 ? 20 : 40, left: window.innerWidth < 868 ? 10 : 50, bottom: 20 }}>
-    //             <CartesianGrid stroke="#ccc" />
-    //             {/* <Legend verticalAlign="top" layout="horizontal" align="right" height="6%" wrapperStyle={{ fontSize: window.innerWidth < 868 ? "8px" : "16px" }} iconSize={window.innerWidth < 868 ? 8 : 16} /> */}
-    //             <Tooltip wrapperStyle={{ fontSize: window.innerWidth < 868 ? "10px" : "16px" }} />
-    //             <Area type="linear" dot={false} dataKey="totalAverage" stroke="#008080" fill="#008080" opacity="70%" isAnimationActive={true} name="Historical Average" />
-    //             {areas}
-    //             <XAxis dataKey="date" interval={(chartRange === '1 year' ? 0 : chartRange === '5 years' ? 2 : 11)} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12, angle: window.innerWidth < 868 ? -90 : -20, dy: window.innerWidth < 868 ? 16 : 8 }} />
-    //             <YAxis label={{ value: "Storage (Acre Feet)", angle: -90, dx: window.innerWidth < 868 ? -28 : -50, fontSize: window.innerWidth < 868 ? 12 : 20 }} tickCount={10} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12 }} domain={[0, Math.floor(1.05 * totalCapacity)]} />
-    //             <ReferenceLine y={totalCapacity} stroke="red" label={{ value: `Capacity: ${totalCapacity.toLocaleString()} AF`, position: "insideLeft", dy: 10, fontSize: window.innerWidth < 868 ? 8 : 16 }} />
-    //         </ComposedChart >
-    //     </ResponsiveContainer >
-    // );
 
     const renderLineChart = (
         <ResponsiveContainer width="100%" height="100%" >

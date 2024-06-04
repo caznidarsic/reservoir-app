@@ -46,19 +46,6 @@ function ReservoirDataToday(props) {
         return monthName;
     }
 
-    // const renderLineChart = (
-    //     < ResponsiveContainer width="100%" height="100%" >
-    //         <BarChart width={500} height={300} data={props.data} margin={{ top: 20, right: window.innerWidth < 868 ? 20 : 40, left: window.innerWidth < 868 ? 0 : 30, bottom: window.innerWidth < 868 ? 0 : 5, }}>
-    //             <CartesianGrid strokeDasharray="3 3" />
-    //             <XAxis dataKey="date" tick={{ fontSize: window.innerWidth < 868 ? 8 : 12 }} />
-    //             <YAxis tickCount={6} tick={{ fontSize: window.innerWidth < 868 ? 8 : 12 }} domain={[0, props.capacity]} />
-    //             <Tooltip wrapperStyle={{ fontSize: window.innerWidth < 868 ? "10px" : "16px" }} />
-    //             <Bar dataKey="value" stackId="a" fill="#6879D0" background={{ fill: '#bbbbbb' }} name='Current Storage (AF)' />
-    //             <ReferenceLine y={props.monthAverage.average} stroke="red" label={{ value: `Avg: ${props.monthAverage.average.toLocaleString()} AF`, fill: "black", position: "inside", dy: window.innerWidth < 868 ? 6 : 10, fontSize: window.innerWidth < 868 ? 6 : 12 }} className="ReferenceFont" />
-    //         </BarChart>
-    //     </ResponsiveContainer >
-    // );
-
     const renderLineChart = (
         < ResponsiveContainer width="100%" height="100%" >
             <BarChart width={500} height={300} data={props.data} margin={{ top: 20, right: 20, left: 30, bottom: 5, }}>
